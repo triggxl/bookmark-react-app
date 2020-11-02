@@ -6,6 +6,7 @@ import Nav from './Nav/Nav';
 import config from './config';
 import './App.css';
 import BookmarksContext from './BookmarksContext';
+import Rating from './Rating/Rating';
 
 // const bookmarks = [
   // {
@@ -85,6 +86,11 @@ class App extends Component {
     }
     return (
       <main className='App'>
+        {/* validation not working */}
+        <Rating rating='hello'/>
+        {/* validation not working */}
+        <BookmarkList bookmarks={[1,2,3,4,5]}/>
+        {/* <BookmarkList bookmarks={[{a:2, b:4}, {a:9, b:12}]}/> */}
         <h1>Bookmarks!</h1>
         <BookmarksContext.Provider value={contextValue}>
           <Nav />
