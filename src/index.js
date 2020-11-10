@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 
-// console.log(process.env);
+// console.log(process.env); (would normally remove)
 ReactDOM.render(
   <BrowserRouter>
     <App />
