@@ -8,30 +8,6 @@ import './App.css';
 import BookmarksContext from './BookmarksContext';
 import Rating from './Rating/Rating';
 
-// const bookmarks = [
-  // {
-  //   id: 0,
-  //   title: 'Google',
-  //   url: 'http://www.google.com',
-  //   rating: '3',
-  //   desc: 'Internet-related services and products.'
-  // },
-  // {
-  //   id: 1,
-  //   title: 'Thinkful',
-  //   url: 'http://www.thinkful.com',
-  //   rating: '5',
-  //   desc: '1-on-1 learning to accelerate your way to a new high-growth tech career!'
-  // },
-  // {
-  //   id: 2,
-  //   title: 'Github',
-  //   url: 'http://www.github.com',
-  //   rating: '4',
-  //   desc: 'brings together the world\'s largest community of developers.'
-  // }
-// ];
-
 class App extends Component {
   state = {
     bookmarks: [],
@@ -123,6 +99,30 @@ wrap any component JSX that needs to utilize context in a context consumer
 inside consumer you're going to create an arrow function with a parameter to expose the context object -->
 swap props with context use that context inside your JSX (context doesn't replace ALL props all the time, only when needed)
 
+dummy data:
+// const bookmarks = [
+  // {
+  //   id: 0,
+  //   title: 'Google',
+  //   url: 'http://www.google.com',
+  //   rating: '3',
+  //   desc: 'Internet-related services and products.'
+  // },
+  // {
+  //   id: 1,
+  //   title: 'Thinkful',
+  //   url: 'http://www.thinkful.com',
+  //   rating: '5',
+  //   desc: '1-on-1 learning to accelerate your way to a new high-growth tech career!'
+  // },
+  // {
+  //   id: 2,
+  //   title: 'Github',
+  //   url: 'http://www.github.com',
+  //   rating: '4',
+  //   desc: 'brings together the world\'s largest community of developers.'
+  // }
+// ];
 
 
 Server for the bookmarks assignemnt has CORS disabled so it doesn't work

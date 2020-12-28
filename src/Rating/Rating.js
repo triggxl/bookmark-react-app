@@ -1,5 +1,5 @@
-import React from 'react';
-import Proptypes from 'prop-types';
+import React from 'react'; //eslint-disable-next-line
+import Proptypes from 'prop-types'; 
 import './Rating.css';
 
 export default function Rating(props) {
