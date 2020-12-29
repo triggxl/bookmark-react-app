@@ -1,88 +1,49 @@
-import React, { Component } from 'react';
-import './App.css';
+require('dotenv').config();
+const { v4: uuid } = require('uuid');
+const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors');
+const helmet = require('helmet');
+const { NODE_ENV } = require('./config');
+const cardRouter = require('./card/card-router');
+const listRouter = require('./list/list-router');
 
-import AddBookmark from './addBookmark/addBookmark';
-import BookmarkApp from './bookmarkApp/bookmarkApp';
+const app = express();
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      bookmarks: [],
-      showAddForm: false
-    };
+const morganSetting = (NODE_ENV === 'production' ? 'tiny': 'common');
+app.use(morgan(morganSetting));
+app.use(helmet());
+app.use(cors());
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+})
+//auth middleware
+app.use(function validateBearerToken(req, res, next) {
+  const apiToken = process.env.API_TOKEN
+  const authToken = req.get('Authorization')
+
+  if (!authToken || authToken.split(' ')[1] !== apiToken) {
+    logger.error(`Unauthorized request to path:${req.path}`);
+    return res.status(401).json({ error: 'Unauthorized request' })
   }
+  // move to the next middleware
+  next()
+})
 
-  componentDidMount() {
-    const url = 'https://tf-ed-bookmarks-api.herokuapp.com/v3/bookmarks';
-    const options = {
-      method: 'GET',
-      headers: {
-        // Add your key after Bearer
-        "Authorization": "Bearer $2a$10$SqQxXDsX5EW6L.Ls52EVRusHkfhO1X3TVBZY9xR61Wk8jm37T/zxW",
-        "Content-Type": "application/json"
-      }
-    };
+//require routers
+app.use(cardRouter);
+app.use(listRouter);
 
-    fetch(url, options)
-      .then(res => {
-        if(!res.ok) {
-          throw new Error('Something went wrong, please try again later.');
-        }
-        return res;
-      })
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          bookmarks: data,
-          error: null
-        });
-      })
-      .catch(err => {
-        this.setState({
-          error: err.message
-        });
-      });
+app.use((error, req, res, next) => {
+  let response;
+  if(NODE_ENV === 'production') {
+    response = { error: { message: 'server error' }}
+  } else {
+    response = { error }
   }
+  res.status(500).json(response)
+})
 
-  //sets showAddForm property
-  setShowAddFrom(show) {
-    this.setState({
-      showAddForm: show
-    });
-  }
-
-  render() {
-    const page = this.state.showAddForm
-    ? <AddBookmark />
-    : <BookmarkApp bookmarks={this.state.bookmarks}/>
-    return (
-      <div className="App">
-       { page }
-      </div>
-    );
-  }
-}
-
-export default App;
-
-/*
-Resources:
-https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-
-*/
-// dummy data
-//const bookmarks = [
-//   {
-//   title:"Google",
-//   url:"http://www.google.com", 
-//   rating:"3", 
-//   description:"No evil"
-//   },
-//   {
-//     title:"Google",
-//     url:"http://www.google.com", 
-//     rating:"3", 
-//     description:"No evil"
-//   }
-// ];
+module.exports = app;
