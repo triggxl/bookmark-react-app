@@ -81,7 +81,7 @@ class App extends Component {
           />
           <Route
             path='/delete-bookmark'
-            component={DeleteBookmark}
+            component={this.deleteBookmark}
           />
           </div>
         </BookmarksContext.Provider>
