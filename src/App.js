@@ -1,49 +1,157 @@
-require('dotenv').config();
-const { v4: uuid } = require('uuid');
-const express = require('express');
-const morgan = require('morgan');
-const cors = require('cors');
-const helmet = require('helmet');
-const { NODE_ENV } = require('./config');
-const cardRouter = require('./card/card-router');
-const listRouter = require('./list/list-router');
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+import AddBookmark from './AddBookmark/AddBookmark';
+import DeleteBookmark from './DeleteBookmark/DeleteBookmark';
+import BookmarkList from './BookmarkList/BookmarkList';
+import Nav from './Nav/Nav';
+import config from './config';
+import './App.css';
+import BookmarksContext from './BookmarksContext';
+import Rating from './rating/Rating';
 
-const app = express();
+class App extends Component {
+  state = {
+    bookmarks: [],
+    error: null,
+  };
 
-const morganSetting = (NODE_ENV === 'production' ? 'tiny': 'common');
-app.use(morgan(morganSetting));
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
-})
-//auth middleware
-app.use(function validateBearerToken(req, res, next) {
-  const apiToken = process.env.API_TOKEN
-  const authToken = req.get('Authorization')
-
-  if (!authToken || authToken.split(' ')[1] !== apiToken) {
-    logger.error(`Unauthorized request to path:${req.path}`);
-    return res.status(401).json({ error: 'Unauthorized request' })
+  setBookmarks = bookmarks => {
+    this.setState({
+      bookmarks,
+      error: null,
+    })
   }
-  // move to the next middleware
-  next()
-})
 
-//require routers
-app.use(cardRouter);
-app.use(listRouter);
-
-app.use((error, req, res, next) => {
-  let response;
-  if(NODE_ENV === 'production') {
-    response = { error: { message: 'server error' }}
-  } else {
-    response = { error }
+  addBookmark = bookmark => {
+    this.setState({
+      bookmarks: [ ...this.state.bookmarks, bookmark ],
+    })
   }
-  res.status(500).json(response)
-})
 
-module.exports = app;
+  deleteBookmark = bookmarkId => {
+    const newBookmarks = this.state.bookmarks.filter(bm => bm.id !== bookmarkId
+    )
+    this.setState({
+      bookmmarks: newBookmarks
+    })
+  }
+
+  componentDidMount() {
+    fetch(config.API_ENDPOINT, {
+      method: 'GET',
+      headers: {
+        'Access-Control-Allow-Origin': 'localhost:3001',
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${config.API_KEY}`
+      }
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(res.status)
+        }
+        return res.json()
+      })
+      .then(this.setBookmarks)
+      .catch(error => this.setState({ error }))
+  }
+
+  render() {
+    const contextValue = {
+      bookmarks: this.state.bookmarks,
+      addBookmark: this.addBookmark,
+      deleteBookmark: this.deleteBookmark
+    }
+    return (
+      <main className='App'>
+        {/* validation not working */}
+        <Rating rating='hello'/>
+        {/* validation not working */}
+        <BookmarkList bookmarks={[1,2,3,4,5]}/>
+        <h1>Bookmarks!</h1>
+        <BookmarksContext.Provider value={contextValue}>
+          <Nav />
+          <div className='content' aria-live='polite'>
+          <Route 
+            exact path='/'
+            component={BookmarkList}
+          />
+          <Route 
+            path='/add-bookmark'
+            component={AddBookmark}
+          />
+          <Route
+            path='/delete-bookmark'
+            component={DeleteBookmark}
+          />
+          </div>
+        </BookmarksContext.Provider>
+      </main>
+    );
+  }
+}
+
+export default App;
+
+/*
+
+create context object with a default value (any type of data, does not have to be state) that any child component can access
+wrap your highest level component with the context provider
+provider will include a value for whatever data you are going to pass
+ie: <Context.Provider value={contextValue}>
+(look at the context that you've made to know what value you're going to give to your provider)
+wrap any component JSX that needs to utilize context in a context consumer 
+inside consumer you're going to create an arrow function with a parameter to expose the context object -->
+swap props with context use that context inside your JSX (context doesn't replace ALL props all the time, only when needed)
+
+dummy data:
+// const bookmarks = [
+  // {
+  //   id: 0,
+  //   title: 'Google',
+  //   url: 'http://www.google.com',
+  //   rating: '3',
+  //   desc: 'Internet-related services and products.'
+  // },
+  // {
+  //   id: 1,
+  //   title: 'Thinkful',
+  //   url: 'http://www.thinkful.com',
+  //   rating: '5',
+  //   desc: '1-on-1 learning to accelerate your way to a new high-growth tech career!'
+  // },
+  // {
+  //   id: 2,
+  //   title: 'Github',
+  //   url: 'http://www.github.com',
+  //   rating: '4',
+  //   desc: 'brings together the world\'s largest community of developers.'
+  // }
+// ];
+
+
+Server for the bookmarks assignemnt has CORS disabled so it doesn't work
+
+Refactor the bookmarks app to use context:
+make context instance to store in bookmarkContext (as empty functions to 'shape' context)
+wrap 'swap' bookmark for context.provider in App.js
+*swap the render callback prop for the more simple component approach to routing
+ex: component={component}
+(App.js should now be using state to store the bookmarks and populating the context from the state)
+use context in the BookmarksList Component
+  add static contextType = ComponentName
+  change this.props --> this.context
+...AddBookmark component
+  ""
+  ""
+  implement the cancel button directly inside this component instead of accepting an onClickCancel prop 
+  handleClickCancel = () => {
+    this.props.history.push('/')
+  };
+
+Implement the delete button:
+implement request (CRUD) in desired component to enable use of function (ie: BookmarkList)
+wrap Consumer context where function is to be used (ie: BookmarkItem)
+remove the deleted bookmark from the bookmarks array in state using the context.deleteBookmark callback fx
+
+Left off at "Assignment"
+*/

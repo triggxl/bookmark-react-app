@@ -6,7 +6,7 @@ const bodyParser = express.json();
 cardRouter
   .route('/card')
   .get((req, res) => {res.json(cards)})
-  .post((req, res) => {
+  .post(bodyParser, (req, res) => {
     //get data from the body
     const { title, content } = req.body;
     //validate that title and content exist

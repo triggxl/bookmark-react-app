@@ -14,7 +14,7 @@ listRouter
       return res.status(400).send('Invalid Data');
     }
     if(cardIds.length > 0) {
-      //if cardIds, validate, make sure the 
+      //if cardIds validate, make sure the card ids match
       let valid = true;
       const card = cardIds.forEach(c => c.id === cid);
       if(!card) {
