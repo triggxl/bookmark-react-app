@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import AddBookmark from './AddBookmark/AddBookmark';
-import DeleteBookmark from './DeleteBookmark/DeleteBookmark';
 import BookmarkList from './BookmarkList/BookmarkList';
 import Nav from './Nav/Nav';
 import config from './config';
@@ -29,10 +28,9 @@ class App extends Component {
   }
 
   deleteBookmark = bookmarkId => {
-    const newBookmarks = this.state.bookmarks.filter(bm => bm.id !== bookmarkId
-    )
+    const newBookmarks = this.state.bookmarks.filter(bm => bm.id !== bookmarkId)
     this.setState({
-      bookmmarks: newBookmarks
+      bookmarks: newBookmarks
     })
   }
 
@@ -51,7 +49,7 @@ class App extends Component {
         }
         return res.json()
       })
-      .then(this.setBookmarks)
+      .then(this.deleteBookmark)
       .catch(error => this.setState({ error }))
   }
 
@@ -66,7 +64,6 @@ class App extends Component {
         {/* validation not working */}
         <Rating rating='hello'/>
         {/* validation not working */}
-        <BookmarkList bookmarks={[1,2,3,4,5]}/>
         <h1>Bookmarks!</h1>
         <BookmarksContext.Provider value={contextValue}>
           <Nav />

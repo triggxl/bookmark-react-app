@@ -1,3 +1,4 @@
+//client
 import React from 'react';
 import Rating from '../rating/Rating';
 import config from '../config';
