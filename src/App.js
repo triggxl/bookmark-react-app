@@ -28,9 +28,10 @@ class App extends Component {
   }
 
   deleteBookmark = bookmarkId => {
-    const newBookmarks = this.state.bookmarks.filter(bm => bm.id !== bookmarkId)
+    const newBookmarks = this.state.bookmarks.filter(bm => bm.id !== bookmarkId
+    )
     this.setState({
-      bookmarks: newBookmarks
+      bookmmarks: newBookmarks
     })
   }
 
@@ -49,7 +50,7 @@ class App extends Component {
         }
         return res.json()
       })
-      .then(this.deleteBookmark)
+      .then(this.setBookmarks)
       .catch(error => this.setState({ error }))
   }
 
@@ -64,6 +65,7 @@ class App extends Component {
         {/* validation not working */}
         <Rating rating='hello'/>
         {/* validation not working */}
+        <BookmarkList bookmarks={[1,2,3,4,5]}/>
         <h1>Bookmarks!</h1>
         <BookmarksContext.Provider value={contextValue}>
           <Nav />
