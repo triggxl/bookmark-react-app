@@ -1,13 +1,11 @@
-const cards = [{
-  id: 1,
-  title: 'Task One',
-  content: 'This is card one'
-}]
+const bookmarks = [ 
+  {
+    id: 2,
+    title: 'Github',
+    url: 'http://www.github.com',
+    rating: '4',
+    desc: 'brings together the world\'s largest community of developers.'
+  }
+]
 
-const lists = [{
-  id: 1,
-  header: 'List One',
-  cardIds: [1]
-}]
-
-module.exports = { cards, lists };
+module.exports = { bookmarks };

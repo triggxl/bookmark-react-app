@@ -5,8 +5,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
-const cardRouter = require('./card/card-router');
-const listRouter = require('./list/list-router');
+const bookmarksRouter = require('./bookmarks-router/bookmarks-router');
 
 const app = express();
 
@@ -32,8 +31,7 @@ app.use(function validateBearerToken(req, res, next) {
 })
 
 //require routers
-app.use(cardRouter);
-app.use(listRouter);
+app.use(bookmarksRouter);
 
 app.use((error, req, res, next) => {
   let response;
