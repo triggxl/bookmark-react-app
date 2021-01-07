@@ -37,6 +37,7 @@ bookmarksRouter
     }
     res.json({ bookmarks })
   })
+  bookmarksRouter
   .route('/bookmarks/:id')
   .get((req, res) => {
     //find()
