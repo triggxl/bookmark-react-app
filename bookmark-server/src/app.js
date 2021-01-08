@@ -18,6 +18,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Hello, world!');
 })
+console.log('app1')
 //auth middleware
 app.use(function validateBearerToken(req, res, next) {
   const apiToken = process.env.API_TOKEN
@@ -29,9 +30,12 @@ app.use(function validateBearerToken(req, res, next) {
   }
   next()
 })
+console.log('app2')
 
 //require routers
 app.use(bookmarksRouter);
+console.log('app3')
+
 
 app.use((error, req, res, next) => {
   let response;
@@ -42,5 +46,6 @@ app.use((error, req, res, next) => {
   }
   res.status(500).json(response)
 })
+console.log('app4')
 
 module.exports = app;

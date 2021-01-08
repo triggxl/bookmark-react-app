@@ -1,5 +1,5 @@
 export default {
-  API_ENDPOINT: `https://localhost:8001/bookmarks`,
+  API_ENDPOINT: `http://localhost:3000/bookmarks`,
   API_KEY: process.env.REACT_APP_API_KEY,
 }
 

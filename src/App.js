@@ -10,7 +10,29 @@ import Rating from './rating/Rating';
 
 class App extends Component {
   state = {
-    bookmarks: [],
+    bookmarks: [
+      {
+        id: 0,
+        title: 'Google',
+        url: 'http://www.google.com',
+        rating: '3',
+        desc: 'Internet-related services and products.'
+      },
+      {
+        id: 1,
+        title: 'Thinkful',
+        url: 'http://www.thinkful.com',
+        rating: '5',
+        desc: '1-on-1 learning to accelerate your way to a new high-growth tech career!'
+      },
+      {
+        id: 2,
+        title: 'Github',
+        url: 'http://www.github.com',
+        rating: '4',
+        desc: 'brings together the world\'s largest community of developers.'
+      }
+    ],
     error: null,
   };
 
@@ -48,6 +70,7 @@ class App extends Component {
         if (!res.ok) {
           throw new Error(res.status)
         }
+        console.log(res.json)
         return res.json()
       })
       .then(this.setBookmarks)
@@ -65,7 +88,7 @@ class App extends Component {
         {/* validation not working */}
         <Rating rating='hello'/>
         {/* validation not working */}
-        <BookmarkList bookmarks={[1,2,3,4,5]}/>
+        <BookmarkList bookmarks={this.context.bookmarks}/>
         <h1>Bookmarks!</h1>
         <BookmarksContext.Provider value={contextValue}>
           <Nav />
@@ -103,29 +126,29 @@ inside consumer you're going to create an arrow function with a parameter to exp
 swap props with context use that context inside your JSX (context doesn't replace ALL props all the time, only when needed)
 
 dummy data:
-// const bookmarks = [
-  // {
-  //   id: 0,
-  //   title: 'Google',
-  //   url: 'http://www.google.com',
-  //   rating: '3',
-  //   desc: 'Internet-related services and products.'
-  // },
-  // {
-  //   id: 1,
-  //   title: 'Thinkful',
-  //   url: 'http://www.thinkful.com',
-  //   rating: '5',
-  //   desc: '1-on-1 learning to accelerate your way to a new high-growth tech career!'
-  // },
-  // {
-  //   id: 2,
-  //   title: 'Github',
-  //   url: 'http://www.github.com',
-  //   rating: '4',
-  //   desc: 'brings together the world\'s largest community of developers.'
-  // }
-// ];
+const bookmarks = [
+  {
+    id: 0,
+    title: 'Google',
+    url: 'http://www.google.com',
+    rating: '3',
+    desc: 'Internet-related services and products.'
+  },
+  {
+    id: 1,
+    title: 'Thinkful',
+    url: 'http://www.thinkful.com',
+    rating: '5',
+    desc: '1-on-1 learning to accelerate your way to a new high-growth tech career!'
+  },
+  {
+    id: 2,
+    title: 'Github',
+    url: 'http://www.github.com',
+    rating: '4',
+    desc: 'brings together the world\'s largest community of developers.'
+  }
+];
 
 
 Server for the bookmarks assignemnt has CORS disabled so it doesn't work
