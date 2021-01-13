@@ -42,12 +42,12 @@ bookmarksRouter
   .get((req, res) => {
     //find()
     const { id } = req.params;
-    bookmarks.find(bm => bm.id === id)
+    const bmMatch = bookmarks.find(bm => bm.id === id)
     if(!bookmarks) {
       logger.Error(`Bookmark with ${id} not found.`);
       res.status(404).send('Bookmark not found.');
     }
-    res.json(bookmarks)
+    res.json(bmMatch)
   })
   .delete((req, res) => {
     //splice()

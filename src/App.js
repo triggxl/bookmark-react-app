@@ -70,9 +70,8 @@ class App extends Component {
         if (!res.ok) {
           throw new Error(res.status)
         }
-        console.log(res.json)
         return res.json()
-      })
+      }).then(res => console.log(res) || res)
       .then(this.setBookmarks)
       .catch(error => this.setState({ error }))
   }
@@ -88,7 +87,7 @@ class App extends Component {
         {/* validation not working */}
         <Rating rating='hello'/>
         {/* validation not working */}
-        <BookmarkList bookmarks={this.context.bookmarks}/>
+        <BookmarkList bookmarks={this.context.bookmarks}/>  {/* duplicate to line 97? */}
         <h1>Bookmarks!</h1>
         <BookmarksContext.Provider value={contextValue}>
           <Nav />

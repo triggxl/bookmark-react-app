@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Rating.css';
 
-export default function Bookmark(props) {
+export default function Rating(props) {
   const stars = [0,0,0,0,0]
     .map((_, i) => i < props.value
       ? <span key={i}>&#9733;</span>
@@ -15,14 +15,11 @@ export default function Bookmark(props) {
   );
 }
 
-Bookmark.propTypes = {
-  title: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+Rating.propTypes = {
   rating: PropTypes.number,
-  description: PropTypes.string
 };
 
-Bookmark.default = {
+Rating.default = {
   rating: 1,
   description: ""
 }

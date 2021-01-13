@@ -78,12 +78,12 @@ BookmarkItem.defaultProps = {
 
 //add propTypes for required values and expected data types
 BookmarkItem.propTypes = {
-  title : Proptypes.string.isRequired,
+  title: Proptypes.string.isRequired,
   // url : Proptypes.string.isRequired,
   // rating : Proptypes.number,
   // description : Proptypes.string,
 
-  url : (props, propName, componentName) => {
+  url: (props, propName, componentName) => {
     const prop = props[propName];
 
     if(!prop) {
