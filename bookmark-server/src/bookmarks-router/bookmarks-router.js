@@ -11,32 +11,34 @@ bookmarksRouter
   .post(bodyParser, (req, res) => {
     //accepts a JSON object representing a bookmark and adds it to the list of bookmarks after validation
     //push()
-    const { id, title, url, rating, desc } = req.params;
+    const { id, title, url, rating, description } = req.params;
     if(!id) {
       logger.error(`Bookmark with ${id} not found.`);
       res.status(404).send('Bookmark not found.');
     }
-    if(!title) {
+    else if(!title) {
       logger.error(`Bookmark with ${title} not found.`);
       res.status(404).send('Bookmark not found.');
     }
-    if(!url) { 
+    else if(!url) { 
       logger.error(`Bookmark with ${url} not found.`); 
       res.status(404).send('Bookmark not found.');
     }
-    if(!rating) {
+    else if(!rating) {
       logger.error(`Bookmark with ${rating} not found.`); 
       res.status(404).send('Bookmark not found.');
     }
-    if(!desc) {
-      logger.error(`Bookmark with ${desc} not found.`); 
+    else if(!description) {
+      logger.error(`Bookmark with ${description} not found.`); 
       res.status(404).send('Bookmark not found.');
     }
-    if(req.params) {
+    else if(req.params) {
       bookmarks.push(req.params)
       res.status(200).send('Added new bookmark successfully.')
     }
-    res.json({ bookmarks })
+    else {
+      res.json({ bookmarks })
+    }
   })
   bookmarksRouter
   .route('/bookmarks/:id')
@@ -53,7 +55,7 @@ bookmarksRouter
   .delete((req, res) => {
     //splice()
     const { id } = req.params;
-    const parseId = parseFloat(id);
+    const parseId = parseInt(id);
     // console.log(typeof id, bookmarks)
     const bookmarkIndex = bookmarks.findIndex(bm => bm.id === parseId)
 

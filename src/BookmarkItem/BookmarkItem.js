@@ -9,7 +9,7 @@ import Proptypes from 'prop-types';
 const deleteBookmarkRequest = (bookmarkId, cb) => {
   console.log('bi1')
   //DELETE http://localhost:8001/bookmarks/2 400 (Bad Request)
-  fetch(config.API_ENDPOINT + `/${bookmarkId}`, {
+  fetch(config.API_ENDPOINT + `/bookmarks/${bookmarkId}`, {
     method: 'DELETE',
     headers: {
       'Authorization': `Bearer ${config.API_KEY}`
