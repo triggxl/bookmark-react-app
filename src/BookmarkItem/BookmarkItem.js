@@ -7,7 +7,8 @@ import BookmarksContext from '../BookmarksContext';
 import Proptypes from 'prop-types';
 
 const deleteBookmarkRequest = (bookmarkId, cb) => {
-  console.log('abc')
+  console.log('bi1')
+  //DELETE http://localhost:8001/bookmarks/2 400 (Bad Request)
   fetch(config.API_ENDPOINT + `/${bookmarkId}`, {
     method: 'DELETE',
     headers: {
@@ -15,16 +16,12 @@ const deleteBookmarkRequest = (bookmarkId, cb) => {
     }
   })
   .then(res => {
-    console.log('def')
+    console.log('bi2')
     if (!res.ok) {
       return res.json().then(error => {
         throw error;
       })
     }
-    return res.json()
-  })
-  .then(data => {
-    console.log({data})
     cb(bookmarkId)
   })
   .catch(error => {
@@ -99,3 +96,8 @@ BookmarkItem.propTypes = {
   rating: Proptypes.number,
   description: Proptypes.string
 }
+
+/*
+Why is 97 true?
+log console.log(prop) < than 5, matching regex
+*/

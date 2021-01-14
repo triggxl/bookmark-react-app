@@ -16,7 +16,7 @@ export default function Rating(props) {
 }
 
 Rating.propTypes = {
-  rating: PropTypes.number,
+  rating: PropTypes.string || PropTypes.number
 };
 
 Rating.default = {

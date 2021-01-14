@@ -10,7 +10,6 @@ class BookmarkList extends Component {
 
   render() {
     const { bookmarks } = this.context
-    console.log(bookmarks);
     return (
       <section className='BookmarkList'>
         <h2>Your bookmarks</h2>

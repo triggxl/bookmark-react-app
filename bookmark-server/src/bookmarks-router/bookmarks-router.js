@@ -1,5 +1,6 @@
 const express = require('express');
 const { bookmarks } = require('../store'); //named export- 'const bookmarks...'
+const logger = require('../logger');
 
 const bookmarksRouter = express.Router();
 const bodyParser = express.json();
@@ -12,23 +13,23 @@ bookmarksRouter
     //push()
     const { id, title, url, rating, desc } = req.params;
     if(!id) {
-      logger.Error(`Bookmark with ${id} not found.`);
+      logger.error(`Bookmark with ${id} not found.`);
       res.status(404).send('Bookmark not found.');
     }
     if(!title) {
-      logger.Error(`Bookmark with ${title} not found.`);
+      logger.error(`Bookmark with ${title} not found.`);
       res.status(404).send('Bookmark not found.');
     }
     if(!url) { 
-      logger.Error(`Bookmark with ${url} not found.`); 
+      logger.error(`Bookmark with ${url} not found.`); 
       res.status(404).send('Bookmark not found.');
     }
     if(!rating) {
-      logger.Error(`Bookmark with ${rating} not found.`); 
+      logger.error(`Bookmark with ${rating} not found.`); 
       res.status(404).send('Bookmark not found.');
     }
     if(!desc) {
-      logger.Error(`Bookmark with ${desc} not found.`); 
+      logger.error(`Bookmark with ${desc} not found.`); 
       res.status(404).send('Bookmark not found.');
     }
     if(req.params) {
@@ -52,13 +53,15 @@ bookmarksRouter
   .delete((req, res) => {
     //splice()
     const { id } = req.params;
-    const bookmarkIndex = bookmarks.findIndex(bm => bm.id === id)
+    const parseId = parseFloat(id);
+    // console.log(typeof id, bookmarks)
+    const bookmarkIndex = bookmarks.findIndex(bm => bm.id === parseId)
 
     if(bookmarkIndex === -1) {
-      logger.error(`Bookmark with id ${id} not found.`);
+      console.error(`Bookmark with id ${id} not found.`);
       return res.status(400).send('Not found.')
     }
-    bookmarkIndex.splice(bookmarkIndex, 1);
+    bookmarks.splice(bookmarks, 1);
     res.status(204).end();
     })
 

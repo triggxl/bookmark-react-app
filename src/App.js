@@ -49,11 +49,14 @@ class App extends Component {
     })
   }
 
+  
   deleteBookmark = bookmarkId => {
+    console.log(this.state.bookmarks,bookmarkId)
     const newBookmarks = this.state.bookmarks.filter(bm => bm.id !== bookmarkId
     )
+    console.log(newBookmarks)
     this.setState({
-      bookmmarks: newBookmarks
+      bookmarks: newBookmarks
     })
   }
 
@@ -75,19 +78,19 @@ class App extends Component {
       .then(this.setBookmarks)
       .catch(error => this.setState({ error }))
   }
-
+  
   render() {
     const contextValue = {
       bookmarks: this.state.bookmarks,
       addBookmark: this.addBookmark,
       deleteBookmark: this.deleteBookmark
     }
+    console.log(contextValue.bookmarks)
     return (
       <main className='App'>
         {/* validation not working */}
-        <Rating rating='hello'/>
+        <Rating rating={'0,1,2,3,4,5'}/>
         {/* validation not working */}
-        <BookmarkList bookmarks={this.context.bookmarks}/>  {/* duplicate to line 97? */}
         <h1>Bookmarks!</h1>
         <BookmarksContext.Provider value={contextValue}>
           <Nav />
@@ -99,10 +102,6 @@ class App extends Component {
           <Route 
             path='/add-bookmark'
             component={AddBookmark}
-          />
-          <Route
-            path='/delete-bookmark'
-            component={this.deleteBookmark}
           />
           </div>
         </BookmarksContext.Provider>
