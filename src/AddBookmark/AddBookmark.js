@@ -18,17 +18,19 @@ class AddBookmark extends Component {
   handleSubmit = e => {
     e.preventDefault()
     // get the form fields from the event
-    const { title, url, description, rating } = e.target
+    const { id, title, url, description, rating } = e.target
     const bookmark = {
+      id: id.value,
       title: title.value,
       url: url.value,
       description: description.value,
       rating: rating.value,
     }
+    console.log(bookmark)
     this.setState({ error: null })
     fetch(`${config.API_ENDPOINT}/bookmarks`, {
       method: 'POST',
-      body: JSON.stringify(bookmark),
+      body: bookmark,
       headers: {
         'content-type': 'application/json',
         'authorization': `bearer ${config.API_KEY}`
@@ -45,6 +47,7 @@ class AddBookmark extends Component {
         return res.json()
       })
       .then(data => {
+        id.value = ''
         title.value = ''
         url.value = ''
         description.value = ''

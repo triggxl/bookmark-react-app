@@ -2,6 +2,9 @@ const express = require('express');
 const { bookmarks } = require('../store'); //named export- 'const bookmarks...'
 const logger = require('../logger');
 
+//This is supposed to fix the 'SyntaxError: Unexpected token o in JSON at position 1' what's your suggestion?
+// const stringified = JSON.stringified(bodyParser);
+// https://thisinterestsme.com/fix-unexpected-token-o-in-json/
 const bookmarksRouter = express.Router();
 const bodyParser = express.json();
 
@@ -9,9 +12,9 @@ bookmarksRouter
   .route('/bookmarks')
   .get((req, res) => res.send(bookmarks))
   .post(bodyParser, (req, res) => {
-    //accepts a JSON object representing a bookmark and adds it to the list of bookmarks after validation
-    //push()
+    //accepting data params from request
     const { id, title, url, rating, description } = req.params;
+    console.log(req.params)
     if(!id) {
       logger.error(`Bookmark with ${id} not found.`);
       res.status(404).send('Bookmark not found.');
@@ -35,8 +38,6 @@ bookmarksRouter
     else if(req.params) {
       bookmarks.push(req.params)
       res.status(200).send('Added new bookmark successfully.')
-    }
-    else {
       res.json({ bookmarks })
     }
   })

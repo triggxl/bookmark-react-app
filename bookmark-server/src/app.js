@@ -20,13 +20,11 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Hello, world!');
 })
-console.log('app1')
 //auth middleware
 app.use(function validateBearerToken(req, res, next) {
   const apiToken = process.env.API_TOKEN
   //get/set header let's get the auth header
   const authToken = req.get('Authorization')
-
   // see if client's key matches the server's token
   if (!authToken || authToken.split(' ')[1] !== apiToken) {
     console.log(authToken, apiToken)
@@ -35,11 +33,9 @@ app.use(function validateBearerToken(req, res, next) {
   }
   next()
 })
-console.log('app2')
 
 //require routers
 app.use(bookmarksRouter);
-console.log('app3')
 
 
 app.use((error, req, res, next) => {
@@ -53,6 +49,5 @@ app.use((error, req, res, next) => {
   logger.error(error)
   console.error(error)
 })
-console.log('app4')
 
 module.exports = app;

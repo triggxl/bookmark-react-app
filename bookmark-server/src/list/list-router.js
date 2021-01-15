@@ -1,6 +1,9 @@
 express = require('express');
 
 const listRouter = express.Router();
+//This is supposed to fix the 'SyntaxError: Unexpected token o in JSON at position 1' what's your suggestion?
+// const stringified = JSON.stringified(bodyParser);
+// https://thisinterestsme.com/fix-unexpected-token-o-in-json/
 const bodyParser = express.json();
 
 listRouter

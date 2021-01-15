@@ -29,10 +29,8 @@ class App extends Component {
 
   
   deleteBookmark = bookmarkId => {
-    console.log(this.state.bookmarks,bookmarkId)
     const newBookmarks = this.state.bookmarks.filter(bm => bm.id !== bookmarkId
     )
-    console.log(newBookmarks)
     this.setState({
       bookmarks: newBookmarks
     })
@@ -52,7 +50,7 @@ class App extends Component {
           throw new Error(res.status)
         }
         return res.json()
-      }).then(res => console.log(res) || res)
+      }).then(res => res)
       .then(this.setBookmarks)
       .catch(error => this.setState({ error }))
   }
@@ -63,7 +61,6 @@ class App extends Component {
       addBookmark: this.addBookmark,
       deleteBookmark: this.deleteBookmark
     }
-    console.log(contextValue.bookmarks)
     return (
       <main className='App'>
         {/* validation not working */}
@@ -92,6 +89,11 @@ export default App;
 
 /*
 
+How to add a console.log using ||
+ }).then(res => console.log(res) || res)
+      .then(this.setBookmarks)
+      .catch(error => this.setState({ error }))
+      
 create context object with a default value (any type of data, does not have to be state) that any child component can access
 wrap your highest level component with the context provider
 provider will include a value for whatever data you are going to pass
