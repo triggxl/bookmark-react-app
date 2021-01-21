@@ -2,6 +2,7 @@ import React, { Component } from  'react';
 import BookmarksContext from '../BookmarksContext';
 import config from '../config'
 import './AddBookmark.css';
+import { v4 as uuidv4 } from 'uuid';
 
 const Required = () => (
   <span className='AddBookmark__required'>*</span>
@@ -13,24 +14,26 @@ class AddBookmark extends Component {
 
   state = {
     error: null,
+    
   };
 
   handleSubmit = e => {
     e.preventDefault()
     // get the form fields from the event
-    const { id, title, url, description, rating } = e.target
+    //can make your own snippets
+    console.log(e.target)
     const bookmark = {
-      id: id.value,
-      title: title.value,
-      url: url.value,
-      description: description.value,
-      rating: rating.value,
+      id: uuidv4(),
+      title: this.state.title,
+      url: this.state.url,
+      description: this.state.description,
+      rating: this.state.rating
     }
     console.log(bookmark)
     this.setState({ error: null })
     fetch(`${config.API_ENDPOINT}/bookmarks`, {
       method: 'POST',
-      body: bookmark,
+      body: JSON.stringify(bookmark),
       headers: {
         'content-type': 'application/json',
         'authorization': `bearer ${config.API_KEY}`
@@ -47,11 +50,6 @@ class AddBookmark extends Component {
         return res.json()
       })
       .then(data => {
-        id.value = ''
-        title.value = ''
-        url.value = ''
-        description.value = ''
-        rating.value = ''
         this.props.history.push('/')
         this.context.onAddBookmark(data)
       })
@@ -66,6 +64,8 @@ class AddBookmark extends Component {
 
   render() {
     const { error } = this.state
+    //define value using short-circuit evaluation?
+    // const value = {this.state.bookmarks.value || ''}
     return (
       <section className='AddBookmark'>
         <h2>Create a bookmark</h2>
@@ -84,6 +84,8 @@ class AddBookmark extends Component {
             </label>
             <input
               type='text'
+              value={this.state.title}
+              onChange={e => this.setState({title : e.target.value})}
               name='title'
               id='title'
               placeholder='Great website!'
@@ -98,6 +100,8 @@ class AddBookmark extends Component {
             </label>
             <input
               type='url'
+              value={this.state.url}
+              onChange={e => this.setState({url : e.target.value})}
               name='url'
               id='url'
               placeholder='https://www.great-website.com/'
@@ -111,6 +115,8 @@ class AddBookmark extends Component {
             <textarea
               name='description'
               id='description'
+              value={this.state.description}
+              onChange={e => this.setState({description : e.target.value})}
             />
           </div>
           <div>
@@ -121,6 +127,8 @@ class AddBookmark extends Component {
             </label>
             <input
               type='number'
+              value={this.state.rating}
+              onChange={e => this.setState({rating : e.target.value})}
               name='rating'
               id='rating'
               defaultValue='1'

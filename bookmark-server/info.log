@@ -48,3 +48,8 @@
 {"expose":true,"statusCode":400,"status":400,"body":"[object Object]","type":"entity.parse.failed","level":"error"}
 {"expose":true,"statusCode":400,"status":400,"body":"[object Object]","type":"entity.parse.failed","level":"error"}
 {"expose":true,"statusCode":400,"status":400,"body":"[object Object]","type":"entity.parse.failed","level":"error"}
+{"expose":true,"statusCode":400,"status":400,"body":"[object Object]","type":"entity.parse.failed","level":"error"}
+{"message":"Bookmark with undefined not found.","level":"error"}
+{"message":"Bookmark with undefined not recieved.","level":"error"}
+{"message":"Bookmark with undefined not recieved.","level":"error"}
+{"message":"Bookmark with undefined not found.","level":"error"}

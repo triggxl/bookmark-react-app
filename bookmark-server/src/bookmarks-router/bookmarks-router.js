@@ -13,31 +13,29 @@ bookmarksRouter
   .get((req, res) => res.send(bookmarks))
   .post(bodyParser, (req, res) => {
     //accepting data params from request
-    const { id, title, url, rating, description } = req.params;
-    console.log(req.params)
+    const { id, title, url, rating } = req.body;
+    console.log(req.body)
     if(!id) {
-      logger.error(`Bookmark with ${id} not found.`);
-      res.status(404).send('Bookmark not found.');
+      //req.params = url params
+      logger.error(`Bookmark with ${id} not recieved.`);
+      //ajax
+      res.status(404).send(`Bookmark ${id} not recieved.`);
     }
     else if(!title) {
       logger.error(`Bookmark with ${title} not found.`);
-      res.status(404).send('Bookmark not found.');
+      res.status(404).send({error: `${title} not recieved.`});
     }
     else if(!url) { 
       logger.error(`Bookmark with ${url} not found.`); 
-      res.status(404).send('Bookmark not found.');
+      res.status(404).send({error: `${url} not recieved.`});
     }
     else if(!rating) {
       logger.error(`Bookmark with ${rating} not found.`); 
-      res.status(404).send('Bookmark not found.');
-    }
-    else if(!description) {
-      logger.error(`Bookmark with ${description} not found.`); 
-      res.status(404).send('Bookmark not found.');
+      res.status(404).send({error: `${rating} not recieved.`});
     }
     else if(req.params) {
       bookmarks.push(req.params)
-      res.status(200).send('Added new bookmark successfully.')
+      res.status(200).send({error: 'Added new bookmark successfully.'})
       res.json({ bookmarks })
     }
   })
