@@ -8,6 +8,7 @@ const logger = require('../logger');
 const bookmarksRouter = express.Router();
 const bodyParser = express.json();
 
+
 bookmarksRouter
   .route('/bookmarks')
   .get((req, res) => res.send(bookmarks))
@@ -33,12 +34,18 @@ bookmarksRouter
       logger.error(`Bookmark with ${rating} not found.`); 
       res.status(404).send({error: `${rating} not recieved.`});
     }
-    else if(req.params) {
-      bookmarks.push(req.params)
-      res.status(200).send({error: 'Added new bookmark successfully.'})
-      res.json({ bookmarks })
+    else if(req.body) {
+      bookmarks.push(req.body)
+      // res.status(200).send({'Added new bookmark successfully.'})
+      res.json(req.body)
     }
   })
+
+  //how do clients and servers talk parts of request learn CRUD methods
+  //url, query params and header send info to the server post body is the data 
+  //express how do I get those things req.params,
+  //react patterns controlled input pattern no default values on 
+  //fetch, data, setState (+/- context),
   bookmarksRouter
   .route('/bookmarks/:id')
   .get((req, res) => {

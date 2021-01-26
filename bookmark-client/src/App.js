@@ -25,6 +25,7 @@ class App extends Component {
     this.setState({
       bookmarks: [ ...this.state.bookmarks, bookmark ],
     })
+    console.log(bookmark)
   }
 
   

@@ -53,3 +53,4 @@
 {"message":"Bookmark with undefined not recieved.","level":"error"}
 {"message":"Bookmark with undefined not recieved.","level":"error"}
 {"message":"Bookmark with undefined not found.","level":"error"}
+{"message":"Bookmark with  not found.","level":"error"}

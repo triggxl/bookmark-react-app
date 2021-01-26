@@ -14,7 +14,10 @@ class AddBookmark extends Component {
 
   state = {
     error: null,
-    
+    title : '',
+    url: '',
+    description: '',
+    rating: ''
   };
 
   handleSubmit = e => {
@@ -50,11 +53,11 @@ class AddBookmark extends Component {
         return res.json()
       })
       .then(data => {
+        this.context.addBookmark(data)
         this.props.history.push('/')
-        this.context.onAddBookmark(data)
       })
       .catch(error => {
-        this.setState({ error })
+        console.error(error)
       })
   }
 
@@ -66,6 +69,7 @@ class AddBookmark extends Component {
     const { error } = this.state
     //define value using short-circuit evaluation?
     // const value = {this.state.bookmarks.value || ''}
+    console.log(this.state.bookmark)
     return (
       <section className='AddBookmark'>
         <h2>Create a bookmark</h2>
@@ -104,7 +108,7 @@ class AddBookmark extends Component {
               onChange={e => this.setState({url : e.target.value})}
               name='url'
               id='url'
-              placeholder='https://www.great-website.com/'
+              placeholder='www.great-website.com/'
               required
             />
           </div>
@@ -128,10 +132,9 @@ class AddBookmark extends Component {
             <input
               type='number'
               value={this.state.rating}
-              onChange={e => this.setState({rating : e.target.value})}
+              onChange={e => this.setState({rating: e.target.value})}
               name='rating'
               id='rating'
-              defaultValue='1'
               min='1'
               max='5'
               required

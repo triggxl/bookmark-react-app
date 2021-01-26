@@ -89,7 +89,7 @@ BookmarkItem.propTypes = {
     if(typeof prop != 'string') {
       return new Error(`Invalid prop, ${propName} is expected to be a string in ${componentName}. ${typeof prop} found.`);
     }
-    if(prop.length < 5 || prop.match(new RegExp(/^https?:\/\//))) {
+    if(prop.length < 5 || prop.match(/^https?:\/\//)) {
       return new Error(`Invalid prop, ${propName} must be a minimum length of 5 and begin with http(s)://. Validation failed.`);
     }
   },
