@@ -54,3 +54,12 @@
 {"message":"Bookmark with undefined not recieved.","level":"error"}
 {"message":"Bookmark with undefined not found.","level":"error"}
 {"message":"Bookmark with  not found.","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks","level":"error"}
+{"message":"Bookmark with undefined not recieved.","level":"error"}
+{"message":"Bookmark with id:undefined not recieved.","level":"error"}
+{"message":"Bookmark with id:undefined not recieved.","level":"error"}
+{"message":"Bookmark with id:undefined not recieved.","level":"error"}
+{"message":"Bookmark with id:0 not recieved.","level":"error"}
+{"message":"Bookmark with id:0 not recieved.","level":"error"}
+{"message":"Bookmark with undefined not found.","level":"error"}
+{"message":"Bookmark with title:undefined not found.","level":"error"}
