@@ -5,17 +5,26 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
+const BookmarksService = require('./bookmarksService')
 const bookmarksRouter = require('./bookmarks-router/bookmarks-router');
 const logger = require('./logger');
 
 const app = express();
 
 
-const morganSetting = (NODE_ENV === 'production' ? 'tiny': 'common');
+const morganSetting = (NODE_ENV === 'production' ? 'tiny' : 'common');
 app.use(morgan(morganSetting));
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+
+app.get('/bookmarks', (req, res, next) => {
+  BookmarksService.getAllBookmarks(knexInstance)
+    .then(bookmark => {
+      res.json(bookmark)
+    })
+    .catch(next)
+})
 
 app.get('/', (req, res) => {
   res.send('Hello, world!');
@@ -40,7 +49,7 @@ app.use(bookmarksRouter);
 
 app.use((error, req, res, next) => {
   let response;
-  if(NODE_ENV === 'production') {
+  if (NODE_ENV === 'production') {
     response = { error: { message: 'server error' } }
   } else {
     response = { error }
