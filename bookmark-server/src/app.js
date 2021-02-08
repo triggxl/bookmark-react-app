@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/bookmarks', (req, res, next) => {
-  BookmarksService.getAllBookmarks(knexInstance)
+  BookmarksService.getAllBookmarks(req.app.get('db'))
     .then(bookmark => {
       res.json(bookmark)
     })

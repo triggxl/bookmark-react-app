@@ -1,5 +1,6 @@
-const bookmarksService = {
-  getAllArticles(knex) {
+// BookmarksService object in the bookmarks-server project that will support CRUD for bookmarks using Knex.
+const BookmarksService = {
+  getAllBookmarks(knex) {
     return knex.select('*').from('bookmarks_assgn')
   },
   insertBookmark(knex, newBookmark) {
@@ -14,16 +15,16 @@ const bookmarksService = {
   getById(knex, id) {
     return knex.from('bookmarks_assgn').select('*').where('id', id).first()
   },
-  deleteArticle(knex, id) {
+  deleteBookmarks(knex, id) {
     return knex('bookmarks_assgn')
       .where({ id })
       .delete()
   },
-  updateArticle(knex, id, newBookmarkFields) {
+  updateBookmarks(knex, id, newBookmarkFields) {
     return knex('bookmarks_assgn')
       .where({ id })
       .update(newBookmarkFields)
   },
 }
 
-module.exports = bookmarksService
+module.exports = BookmarksService
