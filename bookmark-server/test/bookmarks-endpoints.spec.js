@@ -15,7 +15,7 @@ describe.only('Bookmark Endpoints', function () {
 
   after('disconnect from db', () => db.destroy())
 
-  before('clean the table', () => db('bookmarks').truncate())
+  before('clean the table', () => db('bookmarks_assgn').truncate())
 
   context('Given there are bookmarks', () => {
     const testBookmarks = [

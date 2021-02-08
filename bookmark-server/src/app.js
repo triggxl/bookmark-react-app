@@ -18,7 +18,7 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.get('/bookmarks', (req, res, next) => {
+app.get('/bookmarks_assgn', (req, res, next) => {
   BookmarksService.getAllBookmarks(req.app.get('db'))
     .then(bookmark => {
       res.json(bookmark)
