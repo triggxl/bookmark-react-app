@@ -18,7 +18,7 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.get('/bookmarks_assgn', (req, res, next) => {
+app.get('/bookmarks', (req, res, next) => {
   BookmarksService.getAllBookmarks(req.app.get('db'))
     .then(bookmark => {
       res.json(bookmark)
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 //auth middleware
 app.use(function validateBearerToken(req, res, next) {
   const apiToken = process.env.API_TOKEN
-  //get/set header let's get the auth header
+  //added header called 'Authorization' get/set header "let's get the auth header"
   const authToken = req.get('Authorization')
   // see if client's key matches the server's token
   if (!authToken || authToken.split(' ')[1] !== apiToken) {
