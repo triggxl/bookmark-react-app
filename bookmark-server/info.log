@@ -78,3 +78,48 @@
 {"message":"Unauthorized request to path:/bookmarks/1","level":"error"}
 {"message":"Unauthorized request to path:/bookmarks/1","level":"error"}
 {"message":"Unauthorized request to path:/bookmarks/1","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks/:bookmark_id","level":"error"}
+{"length":114,"name":"error","severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1379","routine":"parserOpenTable","level":"error"}
+{"length":114,"name":"error","severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1379","routine":"parserOpenTable","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks/:bookmark_id","level":"error"}
+{"length":114,"name":"error","severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1379","routine":"parserOpenTable","level":"error"}
+{"length":114,"name":"error","severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1379","routine":"parserOpenTable","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks/:bookmark_id","level":"error"}
+{"length":114,"name":"error","severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1379","routine":"parserOpenTable","level":"error"}
+{"length":114,"name":"error","severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1379","routine":"parserOpenTable","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks/:bookmark_id","level":"error"}
+{"length":114,"name":"error","severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1379","routine":"parserOpenTable","level":"error"}
+{"length":114,"name":"error","severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1379","routine":"parserOpenTable","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks/:bookmark_id","level":"error"}
+{"length":114,"name":"error","severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1379","routine":"parserOpenTable","level":"error"}
+{"length":114,"name":"error","severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1379","routine":"parserOpenTable","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks/:bookmark_id","level":"error"}
+{"length":114,"name":"error","severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1379","routine":"parserOpenTable","level":"error"}
+{"length":114,"name":"error","severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1379","routine":"parserOpenTable","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks/:bookmark_id","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks/:bookmark_id","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks/:bookmark_id","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks/:bookmark_id","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks/:bookmark_id","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks/:bookmark_id","level":"error"}
+{"length":110,"name":"error","severity":"ERROR","code":"22P02","file":"numutils.c","line":"323","routine":"pg_strtoint32","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks/:bookmark_id","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks/:bookmark_id","level":"error"}
+{"length":110,"name":"error","severity":"ERROR","code":"22P02","file":"numutils.c","line":"323","routine":"pg_strtoint32","level":"error"}
+{"message":"Unauthorized request to path:/bookmarks/:bookmark_id","level":"error"}
+{"length":110,"name":"error","severity":"ERROR","code":"22P02","file":"numutils.c","line":"323","routine":"pg_strtoint32","level":"error"}
+{"length":110,"name":"error","severity":"ERROR","code":"22P02","file":"numutils.c","line":"323","routine":"pg_strtoint32","level":"error"}
+{"length":121,"name":"error","severity":"ERROR","code":"22P02","file":"numutils.c","line":"323","routine":"pg_strtoint32","level":"error"}

@@ -1,4 +1,4 @@
-INSERT INTO bookmarks_assgn
+INSERT INTO bookmarks
   (id, title, url, description, rating)
 VALUES
   (1, 'First Bookmark', 'https://firstbookmark.org', 'this is my first bookmark', 5),
