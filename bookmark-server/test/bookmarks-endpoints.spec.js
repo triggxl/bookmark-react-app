@@ -91,7 +91,7 @@ describe('Bookmark Endpoints', function () {
         title: 'Test, new bookmark',
         url: 'http://testBookmarkSite.com',
         description: 'Test, new bookmark description...',
-        rating: `'Example rating: '5'`
+        rating: 5
       }
       it(`responds with 400 and an error message when the ${field} is missing`, () => {
         delete newBookmark[field]

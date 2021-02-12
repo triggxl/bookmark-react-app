@@ -66,7 +66,12 @@ bookmarksRouter
       .catch(next)
   })
 
+  .route(`bookmarks/:bookmark_id`)
+  .delete((req, res, next) => {
+
+  })
 //add delete handler for 2nd error
+
 
 module.exports = bookmarksRouter;
 
