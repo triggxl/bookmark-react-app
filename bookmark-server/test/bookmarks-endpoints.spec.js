@@ -30,7 +30,6 @@ describe('Bookmark Endpoints', function () {
   })
 
   context('Given there are bookmarks', () => {
-
     const testBookmarks = makeBookmarksArray()
 
     beforeEach('insert bookmarks', () => {
@@ -45,13 +44,6 @@ describe('Bookmark Endpoints', function () {
         .expect(200, testBookmarks)
     })
   })
-  /*
-  it(`description`, () => {
-    return run supertest
-    require endpoint
-    expect(status, result)
-  })
-  */
 
   describe(`POST /bookmarks`, () => {
     it(`creates a bookmark, responding with a 201 and the new bookmark`, () => {
@@ -135,7 +127,6 @@ describe('Bookmark Endpoints', function () {
             .expect(404, { error: { message: `Bookmark doesn't exist` } })
         })
       })
-
       context(`Given there are bookmarks`, () => {
         const testBookmarks = makeBookmarksArray()
         beforeEach(`insert bookmarks`, () => {
@@ -165,6 +156,17 @@ describe('Bookmark Endpoints', function () {
                 .expect(expectedBookmark)
             })
         })
+        it(`responds with 400 when no required fields supplied`, () => {
+          const idToUpdate = 2;
+          return supertest(app)
+            .patch(`/api/bookmarks/${idToUpdate}`)
+            .send({ irrelevantField: 'foo' })
+            .expect(400, {
+              error: {
+                message: `Request body must contain either 'title', 'url', and 'rating'`
+              }
+            })
+        })
       })
 
       context(`Given there are bookmarks in the database`, () => {
@@ -178,7 +180,6 @@ describe('Bookmark Endpoints', function () {
                 .insert(testBookmarks)
             })
         })
-
         it(`responds with 204 and removes the bookmark`, () => {
           const idToRemove = 3;
           const expectedBookmark = testBookmarks.filter(bookmark => bookmark.id !== idToRemove)
@@ -192,18 +193,16 @@ describe('Bookmark Endpoints', function () {
                 .expect(expectedBookmark)
             )
         })
-        it(`responds with 400 when no required fields supplied`, () => {
-          const idToUpdate = 2;
-          return supertest(app)
-            .patch(`/api/bookmarks/${idToUpdate}`)
-            .send({ irrelevantField: 'foo' })
-            .expect(400, {
-              error: {
-                message: `Request body must contain either 'title', 'url', and 'rating'`
-              }
-            })
-        })
       })
     })
   })
 })
+
+// pseudocode
+/*
+it(`description`, () => {
+  return run supertest
+  require endpoint
+  expect(status, result)
+})
+*/
