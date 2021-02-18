@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const xss = require('xss');
 const BookmarksService = require('../bookmarksService')
@@ -42,7 +43,7 @@ bookmarksRouter
       .then(bookmark => {
         res
           .status(201)
-          .location(`/bookmarks/${bookmark.id}`)
+          .location(path.posix.join(req.originalUrl, `${bookmark.id}`))
           .json(serializedBookmark(bookmark))
       })
       .catch(next)
@@ -51,11 +52,11 @@ bookmarksRouter
 bookmarksRouter
   .route(`/bookmarks/:bookmark_id`)
   .all((req, res, next) => { //handler for all https verbs
-    console.log('here')
+    // console.log('here')
     const knexInstance = req.app.get('db')
     BookmarksService.getById(knexInstance, req.params.bookmark_id)
       .then(bookmark => {
-        console.log(bookmark, 'bookmark')
+        // console.log(bookmark, 'bookmark')
         if (!bookmark) {
           return res.status(404).json({
             error: { message: `Bookmark doesn't exist` }
@@ -68,7 +69,27 @@ bookmarksRouter
 
   .route(`bookmarks/:bookmark_id`)
   .delete((req, res, next) => {
-
+    BookmarksService.deleteBookmarks(
+      req.app.get('db'),
+      req.params.bookmark_id
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
+      })
+      .catch(next)
+  })
+  .patch(jsonParser, (req, res) => {
+    const { title, url, description, rating } = req.body;
+    const bookmarkToUpdate = { title, url, description, rating }
+    BookmarksService.updateBookmarks(
+      req.app.get('db'),
+      req.params.bookmark_id,
+      bookmarkToUpdate
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
+      })
+      .catch(next)
   })
 //add delete handler for 2nd error
 
@@ -77,7 +98,12 @@ module.exports = bookmarksRouter;
 
 
 
-
+/*
+1.) prefix every path with /api to explicitly know which URIs are back-end
+2.) add that path to app.use before bookmarksRouter in app.js
+3.) use property of request object (.location(req.originalUrl + `${bookmark.id}`) in bookmarks-router.js) --> req.originalUrl to automatically adjust to our deployed URL when we deploy the application
+4.) to avoid a trailing slash "//", require path in bookmarks-router and wrap path.posix.join --> .location(path.posix.join(req.originalUrl + `${bookmark.id}
+*/
 
 
 

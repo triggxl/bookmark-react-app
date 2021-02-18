@@ -44,7 +44,7 @@ app.use(function validateBearerToken(req, res, next) {
 })
 
 //require routers
-app.use(bookmarksRouter);
+app.use('/api/bookmarks', bookmarksRouter);
 
 
 app.use((error, req, res, next) => {
@@ -60,3 +60,4 @@ app.use((error, req, res, next) => {
 })
 
 module.exports = app;
+
