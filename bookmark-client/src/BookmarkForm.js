@@ -125,4 +125,5 @@ Steps needed for building the update form in a React application:
 7. Implement the update method to update the context's data in the provider component.
 
 And that should be the full-stack implementation! We'd have built a new route for updating individual articles that renders a form. When the form is rendered, we'd fetch the current values for the article. When the form is submitted we'd send a PATCH request to update the article in the database, then if the PATCH request is successful we would update the context provider component so the new article's values are in shared state.
+https://jonathan-wong.medium.com/javascript-object-oriented-programming-oop-b5be855401c4
 */
