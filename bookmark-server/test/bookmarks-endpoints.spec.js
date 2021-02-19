@@ -118,7 +118,7 @@ describe('Bookmark Endpoints', function () {
       })
     })
 
-    descibe.only(`PATCH /api/bookmarks/:bookmark:id`, () => {
+    describe.only(`PATCH /api/bookmarks/:bookmark:id`, () => {
       context(`Given no bookmarks`, () => {
         it(`responds with 404`, () => {
           const bookmarkId = 123456;
@@ -168,10 +168,9 @@ describe('Bookmark Endpoints', function () {
             })
         })
       })
-
       context(`Given there are bookmarks in the database`, () => {
         const testBookmarks = makeBookmarksArray();
-        beforeEach(`insert bookmarks`, () => {
+        beforeEach(`insert bookmarks`, (done) => {
           return db
             .truncate(`bookmarks`)
             .then(() => {
@@ -198,6 +197,19 @@ describe('Bookmark Endpoints', function () {
   })
 })
 
+/*
+
+Hi, I could use some help getting my Bookmark-react-app working properly as a RESTful API
+Checkpoint:
+https://courses.thinkful.com/node-postgres-v1/checkpoint/17
+Repo: https://github.com/triggxl/bookmark-react-app
+
+Hi, yes I'm working on my RESTful API assignment for my bookmarks-react-app and to update my Bookmarks API. Think I'm missing 5.) to allow partial update and having trouble getting ITs to pass.
+Checkpoint:
+https://courses.thinkful.com/node-postgres-v1/checkpoint/17
+Repo:
+https://github.com/triggxl/bookmark-react-app
+*/
 // pseudocode
 /*
 it(`description`, () => {

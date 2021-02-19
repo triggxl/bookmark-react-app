@@ -13,9 +13,14 @@ class BookmarkList extends Component {
     return (
       <section className='BookmarkList'>
         <h2>Your bookmarks</h2>
+        <li>
+          <h3>{props.title}</h3>
+          <Link to={`/edit/${props.id}`}>Edit Bookmark</Link>
+          <Link to={`/read/${props.id}`}>Read Bookmark</Link>
+        </li>
         <ul className='BookmarkList__list' aria-live='polite'>
           {bookmarks.map(bookmark =>
-          console.log(bookmark.url, bookmark.rating)||
+            console.log(bookmark.url, bookmark.rating) ||
             <BookmarkItem
               key={bookmark.id}
               {...bookmark}
@@ -31,10 +36,10 @@ export default BookmarkList;
 
 //add PropTypes to the BookmarkList component to check that the prop is an array and shape gives us the means to specify precisely what we want our object to look like
 BookmarkList.propTypes = {
-  bookmarks : Proptypes.arrayOf(Proptypes.shape({
-    title : Proptypes.string.isRequired,
-    url : Proptypes.string.isRequired,
-    rating : Proptypes.number,
-    description : Proptypes.string
+  bookmarks: Proptypes.arrayOf(Proptypes.shape({
+    title: Proptypes.string.isRequired,
+    url: Proptypes.string.isRequired,
+    rating: Proptypes.number,
+    description: Proptypes.string
   }))
 }

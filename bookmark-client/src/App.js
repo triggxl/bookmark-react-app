@@ -23,12 +23,12 @@ class App extends Component {
 
   addBookmark = bookmark => {
     this.setState({
-      bookmarks: [ ...this.state.bookmarks, bookmark ],
+      bookmarks: [...this.state.bookmarks, bookmark],
     })
     console.log(bookmark)
   }
 
-  
+
   deleteBookmark = bookmarkId => {
     const newBookmarks = this.state.bookmarks.filter(bm => bm.id !== bookmarkId
     )
@@ -55,30 +55,48 @@ class App extends Component {
       .then(this.setBookmarks)
       .catch(error => this.setState({ error }))
   }
-  
+
+  updateBookmark = () => {
+    updateBookmark = updatedBookmark => {
+      const newBookmarks = this.state.bookmarks.map(bm => {
+        (bm.id === updatedBookmark.id)
+          ? updatedBookmark
+          : bm
+      })
+      this.setState({
+        bookmarks: newBookmarks
+      })
+    }
+  }
+
   render() {
     const contextValue = {
       bookmarks: this.state.bookmarks,
       addBookmark: this.addBookmark,
-      deleteBookmark: this.deleteBookmark
+      deleteBookmark: this.deleteBookmark,
+      updateBookmark: this.updateBookmark
     }
     return (
       <main className='App'>
         {/* validation not working */}
-        <Rating rating={'0,1,2,3,4,5'}/>
+        <Rating rating={'0,1,2,3,4,5'} />
         {/* validation not working */}
         <h1>Bookmarks!</h1>
         <BookmarksContext.Provider value={contextValue}>
           <Nav />
           <div className='content' aria-live='polite'>
-          <Route 
-            exact path='/'
-            component={BookmarkList}
-          />
-          <Route 
-            path='/add-bookmark'
-            component={AddBookmark}
-          />
+            <Route
+              exact path='/'
+              component={BookmarkList}
+            />
+            <Route
+              path='/add-bookmark'
+              component={AddBookmark}
+            />
+            <Route
+              path='edit/:bookmarkId'
+              component={EditBookmark}
+            />
           </div>
         </BookmarksContext.Provider>
       </main>
@@ -94,13 +112,13 @@ How to add a console.log using ||
  }).then(res => console.log(res) || res)
       .then(this.setBookmarks)
       .catch(error => this.setState({ error }))
-      
+
 create context object with a default value (any type of data, does not have to be state) that any child component can access
 wrap your highest level component with the context provider
 provider will include a value for whatever data you are going to pass
 ie: <Context.Provider value={contextValue}>
 (look at the context that you've made to know what value you're going to give to your provider)
-wrap any component JSX that needs to utilize context in a context consumer 
+wrap any component JSX that needs to utilize context in a context consumer
 inside consumer you're going to create an arrow function with a parameter to expose the context object -->
 swap props with context use that context inside your JSX (context doesn't replace ALL props all the time, only when needed)
 
@@ -144,7 +162,7 @@ use context in the BookmarksList Component
 ...AddBookmark component
   ""
   ""
-  implement the cancel button directly inside this component instead of accepting an onClickCancel prop 
+  implement the cancel button directly inside this component instead of accepting an onClickCancel prop
   handleClickCancel = () => {
     this.props.history.push('/')
   };

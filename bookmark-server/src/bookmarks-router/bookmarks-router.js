@@ -66,8 +66,6 @@ bookmarksRouter
       })
       .catch(next)
   })
-
-  .route(`bookmarks/:bookmark_id`)
   .delete((req, res, next) => {
     BookmarksService.deleteBookmarks(
       req.app.get('db'),
