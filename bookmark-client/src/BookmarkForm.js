@@ -113,8 +113,8 @@ class EditBookmarkForm extends Component {
 module.export = EditBookmarkForm;
 
 /*
-unable to test b/c no access to db
-fill it componentDidMount + handleSubmit methods
+unable to test b/c unable to access db
+still need to fill in componentDidMount + handleSubmit methods
 Steps needed for building the update form in a React application:
 1. Add an update method to your context, and also add the method in the context provider component.
 2. Add a route for editing the item, e.g. article.
